@@ -18,17 +18,16 @@ public class ClienteBean implements Serializable {
 
 	private ArrayList<Cliente> clienteList = new ArrayList<Cliente>();
 	private Cliente cliente;
+	private ICliente daocliente = Factory.getCliente(Factory.DaoType.CLIENTE);
 
 	public ClienteBean() {
 		// TODO Auto-generated constructor stub
 		setCliente(new Cliente());
-		ICliente daocliente = Factory.getCliente(Factory.DaoType.CLIENTE);
 		clienteList = daocliente.listaRegistros();
 	}
 
 	public void agregarCliente() {
 		System.out.println("----------Agregar----------" + cliente.toString());
-		ICliente daocliente = Factory.getCliente(Factory.DaoType.CLIENTE);
 		daocliente.crearRegistro(cliente);
 		clienteList.add(cliente);
 		cliente = new Cliente();
@@ -42,14 +41,12 @@ public class ClienteBean implements Serializable {
 	public void guardarCliente(Cliente cliente) {
 		cliente.setEditar(false);
 		System.out.println("----------Guardar----------" + cliente.toString());
-		ICliente daocliente = Factory.getCliente(Factory.DaoType.CLIENTE);
 		daocliente.actualizarRegistro(cliente, cliente.getId());
 	}
 
 	public void eliminaCliente(Cliente cliente) {
 		System.out.println("----------Eliminar----------" + cliente.toString());
 		clienteList.remove(cliente);
-		ICliente daocliente = Factory.getCliente(Factory.DaoType.CLIENTE);
 		daocliente.eliminarRegistro(cliente.getId());
 	}
 
