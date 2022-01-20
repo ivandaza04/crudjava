@@ -4,18 +4,89 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-<h:head></h:head>
+<h:head>
+	<title>CrudJSF</title>
+</h:head>
 <body>
 
-	<h1>Ejemplo JSF</h1>
+	<h1>Cliente</h1>
+	<hr />
 	<h:form>
-		<h:outputText value="#{saludoBean.saludo}" />
-		<br></br>
-		<h:inputText value="#{saludoBean.nombre}" />
-		<br></br>
-		<h:commandButton action="#{saludoBean.saludarPersona()}" value="boton" />
-		<br></br>
-		<h:outputText value="#{saludoBean.saludo}" />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Identificacion" for="id" />
+			<h:inputText value="#{clienteBean.cliente.id}" id="id" />
+			<h:outputLabel value="Nombres:" for="nombres" />
+			<h:inputText value="#{clienteBean.cliente.nombres}" id="nombres" />
+			<h:outputLabel value="Apellidos" for="apellidos" />
+			<h:inputText value="#{clienteBean.cliente.apellidos}" id="apellidos" />
+			<h:outputLabel value="Telefono" for="telefono" />
+			<h:inputText value="#{clienteBean.cliente.telefono}" id="telefono" />
+			<h:outputLabel value="Ciudad:" for="ciudad" />
+			<h:inputText value="#{clienteBean.cliente.ciudad}" id="ciudad" />
+		</h:panelGrid>
+		<br />
+		<h:commandButton action="#{clienteBean.agregarCliente()}"
+			value="Registrar" />
+		&nbsp;
+	</h:form>
+
+	<h2>Registros Clientes</h2>
+	<h:form>
+		<h:dataTable value="#{clienteBean.clienteList}" var="datos"
+			rendered="#{clienteBean.clienteList.size()>0}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Id" />
+				</f:facet>
+				<h:outputLabel value="#{datos.id}" rendered="#{not datos.editar}" />
+				<h:inputText value="#{datos.id}" rendered="#{datos.editar}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Nombres" />
+				</f:facet>
+				<h:outputLabel value="#{datos.nombres}"
+					rendered="#{not datos.editar}" />
+				<h:inputText value="#{datos.nombres}" rendered="#{datos.editar}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Apellidos" />
+				</f:facet>
+				<h:outputLabel value="#{datos.apellidos}"
+					rendered="#{not datos.editar}" />
+				<h:inputText value="#{datos.apellidos}" rendered="#{datos.editar}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Telefono" />
+				</f:facet>
+				<h:outputLabel value="#{datos.telefono}"
+					rendered="#{not datos.editar}" />
+				<h:inputText value="#{datos.telefono}" rendered="#{datos.editar}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Ciudad" />
+				</f:facet>
+				<h:outputLabel value="#{datos.ciudad}"
+					rendered="#{not datos.editar}" />
+				<h:inputText value="#{datos.ciudad}" rendered="#{datos.editar}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Acciones" />
+				</f:facet>
+				<h:commandLink action="#{clienteBean.editarCliente(datos)}"
+					value="Editar" rendered="#{not datos.editar}" />
+				&nbsp;
+				<h:commandLink action="#{clienteBean.guardarCliente(datos)}"
+					value="Guardar" rendered="#{datos.editar}" />
+				&nbsp;
+				<h:commandLink action="#{clienteBean.eliminaCliente(datos)}"
+					value="Eliminar" />
+			</h:column>
+		</h:dataTable>
 	</h:form>
 
 </body>
