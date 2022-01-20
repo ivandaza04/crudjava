@@ -6,8 +6,10 @@
 
 <h:head>
 	<title>CrudJSF</title>
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
 </h:head>
 <body>
+
 
 	<h1>Cliente</h1>
 	<hr />
@@ -26,14 +28,15 @@
 		</h:panelGrid>
 		<br />
 		<h:commandButton action="#{clienteBean.agregarCliente()}"
-			value="Registrar" />
+			value="Registrar" class="btn btn-primary active" />
 		&nbsp;
 	</h:form>
 
 	<h2>Registros Clientes</h2>
 	<h:form>
 		<h:dataTable value="#{clienteBean.clienteList}" var="datos"
-			rendered="#{clienteBean.clienteList.size()>0}">
+			rendered="#{clienteBean.clienteList.size()>0}" border="4"
+			style="width:800px">
 			<h:column>
 				<f:facet name="header">
 					<h:outputLabel value="Id" />
