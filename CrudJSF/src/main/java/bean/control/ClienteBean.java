@@ -26,11 +26,12 @@ public class ClienteBean implements Serializable {
 		clienteList = daocliente.listaRegistros();
 	}
 
-	public void agregarCliente() {
+	public String agregarCliente() {
 		System.out.println("----------Agregar----------" + cliente.toString());
 		daocliente.crearRegistro(cliente);
 		clienteList.add(cliente);
 		cliente = new Cliente();
+		return "index";
 	}
 
 	public void editarCliente(Cliente cliente) {
