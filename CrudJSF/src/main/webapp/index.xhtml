@@ -82,13 +82,15 @@
 								<h:outputLabel value="Acciones" />
 							</f:facet>
 							<h:commandLink action="#{clienteBean.editarCliente(datos)}"
-								value="Editar" rendered="#{not datos.editar}" />
+								value="Editar" rendered="#{not datos.editar}"
+								class="btn btn-primary active" />
 				&nbsp;
 				<h:commandLink action="#{clienteBean.guardarCliente(datos)}"
-								value="Guardar" rendered="#{datos.editar}" />
+								value="Guardar" rendered="#{datos.editar}"
+								class="btn btn-primary active" />
 				&nbsp;
 				<h:commandLink action="#{clienteBean.eliminaCliente(datos)}"
-								value="Eliminar" />
+								value="Eliminar" class="btn btn-danger" />
 						</h:column>
 					</h:dataTable>
 				</h:form>
